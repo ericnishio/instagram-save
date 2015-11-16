@@ -13,13 +13,14 @@ if (process.argv.length < 3) {
 save(id);
 
 /**
- * @param  {string} mediaId
+ * @param  {string} identifier media ID or URL
  * @return {Promise}
  */
-function save(mediaId) {
+function save(identifier) {
   return new Promise((resolve, reject) => {
-    const url = `https://www.instagram.com/p/${mediaId}/`;
-    const filename = `${dir}/${mediaId}.jpg`;
+    const url = identifier.substring(0, 8) === 'https://'
+      ? identifier
+      : `https://www.instagram.com/p/${identifier}/`;
 
     request(url, (err, response, body) => {
       if (err) {
@@ -31,16 +32,19 @@ function save(mediaId) {
       const $ = cheerio.load(body);
       const isVideo = $('meta[name="medium"]').attr('content') === 'video';
       const mimeType = $('meta[property="og:video:type"]').attr('content') || 'image/jpeg';
+      const canonicalUrl = $('link[rel="canonical"]').attr('href');
+
+      if (!canonicalUrl) {
+        console.log(clc.red(`Invalid media ID.`));
+
+        return reject();
+      }
+
+      const mediaId = canonicalUrl.split('/')[4];
       const filename = createFilename(mediaId, mimeType);
       const downloadUrl = isVideo
         ? $('meta[property="og:video"]').attr('content')
         : $('meta[property="og:image"]').attr('content');
-
-      if (!downloadUrl) {
-        console.log(clc.red(`Invalid media ID `) + clc.white(`${mediaId}`));
-
-        return reject();
-      }
 
       request.head(downloadUrl, (err, res, body) => {
         request(downloadUrl)
