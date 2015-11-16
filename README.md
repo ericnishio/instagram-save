@@ -27,7 +27,7 @@ $ instagram-save dU4fHDw-Ho 6IbLiMQ-LE
 
 ## Node Usage
 
-```
+```javascript
 const instagramSave = require('instagram-save');
 
 instagramSave('dU4fHDw-Ho', 'myDir').then(res => {
