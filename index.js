@@ -1,7 +1,6 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const fs = require('fs');
-const async = require('async');
 const _ = require('lodash');
 
 module.exports = save;
