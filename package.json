@@ -31,6 +31,10 @@
   ],
   "author": "Eric Nishio <eric@self-learner.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ericnishio/instagram-save.git"
+  },
   "dependencies": {
     "cheerio": "^0.19.0",
     "cli-color": "^1.1.0",
