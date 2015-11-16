@@ -9,13 +9,13 @@ directory.
 Requirements: *Node 4+*
 
 ```
-npm install -g instagram-save
+$ npm install -g instagram-save
 ```
 
 ## Usage
 
-Call `instagram-save` and pass a media ID as an argument, like so:
+Run `instagram-save` and pass a media ID as an argument, like so:
 
 ```
-instagram-save dU4fHDw-Ho
+$ instagram-save dU4fHDw-Ho
 ```
