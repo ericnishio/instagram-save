@@ -12,7 +12,7 @@ Requirements: *Node 4+*
 $ npm install -g instagram-save
 ```
 
-## Usage
+## CLI Usage
 
 Run `instagram-save` by passing one or more URLs or media IDs as arguments,
 like so:
@@ -25,7 +25,17 @@ $ instagram-save https://www.instagram.com/p/dU4fHDw-Ho/
 $ instagram-save dU4fHDw-Ho 6IbLiMQ-LE
 ```
 
-## Run code linter
+## Node Usage
+
+```
+const instagramSave = require('instagram-save');
+
+instagramSave('dU4fHDw-Ho', 'myDir').then(res => {
+  console.log(res.file);
+});
+```
+
+## Lint Code
 
 ```
 $ npm run lint

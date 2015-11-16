@@ -1,63 +1,63 @@
 const cheerio = require('cheerio');
 const request = require('request');
-const clc = require('cli-color');
 const fs = require('fs');
 const async = require('async');
 const _ = require('lodash');
-const dir = process.cwd();
-const identifiers = process.argv.slice(2);
 
-if (identifiers.length < 1) {
-  return console.log(clc.yellow(`Usage: `) + clc.white(`instagram-save [URL or media ID]`));
-}
-
-async.map(identifiers, save);
+module.exports = save;
 
 /**
  * @param  {string} identifier media ID or URL
  * @return {Promise}
  */
-function save(identifier) {
+function save(identifier, dir) {
   return new Promise((resolve, reject) => {
     const url = identifier.substring(0, 8) === 'https://' ? identifier : `https://www.instagram.com/p/${identifier}/`;
 
     request(url, (err, response, body) => {
       if (err) {
-        console.log(clc.red(`Failed to request resource: ${url}`));
-
-        return reject();
+        return reject({
+          message: `Failed to request resource`,
+          url,
+          error: err
+        });
       }
 
       const $ = cheerio.load(body);
       const canonicalUrl = $('link[rel="canonical"]').attr('href');
 
       if (!canonicalUrl) {
-        console.log(clc.red(`Invalid media ID.`));
-
-        return reject();
+        return reject({
+          message: `Invalid media ID`,
+          url
+        });
       }
 
       const isVideo = $('meta[name="medium"]').attr('content') === 'video';
       const mimeType = isVideo ? $('meta[property="og:video:type"]').attr('content') : 'image/jpeg';
       const mediaId = canonicalUrl.split('/')[4];
-      const filename = createFilename(mediaId, mimeType);
+      const filename = createFilename(mediaId, mimeType, dir);
       const downloadUrl = isVideo ? $('meta[property="og:video"]').attr('content') : $('meta[property="og:image"]').attr('content');
 
       request.head(downloadUrl, error => {
         if (error) {
-          console.log(clc.red(`Download failed.`));
-
-          return reject(error);
+          return reject({
+            message: `Download failed`,
+            url,
+            error
+          });
         }
 
         request(downloadUrl)
           .pipe(fs.createWriteStream(filename))
           .on('close', () => {
-            const mediaType = isVideo ? 'Video' : 'Photo';
-
-            console.log(clc.green(`${mediaType} saved to `) + clc.white(`${filename}`));
-
-            return resolve(filename);
+            return resolve({
+              file: filename,
+              type: isVideo ? 'video' : 'photo',
+              mimeType,
+              url,
+              source: downloadUrl
+            });
           });
       });
     });
@@ -67,9 +67,10 @@ function save(identifier) {
 /**
  * @param  {string} mediaId
  * @param  {string} mimeType
+ * @param  {string} dir
  * @return {string}
  */
-function createFilename(mediaId, mimeType) {
+function createFilename(mediaId, mimeType, dir) {
   const mimeTypeToExtensionMap = {
     'video/mp4': '.mp4',
     'video/ogg': '.ogg',

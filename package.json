@@ -8,7 +8,7 @@
     "node": ">=4.0.0"
   },
   "bin": {
-    "instagram-save": "bin/instagram-save.js"
+    "instagram-save": "bin/cli.js"
   },
   "preferGlobal": "true",
   "scripts": {
