@@ -1,7 +1,7 @@
 {
   "name": "instagram-save",
   "version": "1.1.0",
-  "description": "",
+  "description": "Downloads and saves Instagram photos and videos to your current working directory.",
   "main": "index.js",
   "engine-strict": true,
   "engines": {
@@ -12,7 +12,7 @@
   },
   "preferGlobal": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "node node_modules/eslint/bin/eslint.js index.js"
   },
   "keywords": [
     "instagram",
@@ -36,9 +36,13 @@
     "url": "https://github.com/ericnishio/instagram-save.git"
   },
   "dependencies": {
+    "async": "^1.5.0",
     "cheerio": "^0.19.0",
     "cli-color": "^1.1.0",
     "lodash": "^3.10.1",
     "request": "^2.65.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.9.0"
   }
 }

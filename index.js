@@ -2,15 +2,16 @@ const cheerio = require('cheerio');
 const request = require('request');
 const clc = require('cli-color');
 const fs = require('fs');
+const async = require('async');
 const _ = require('lodash');
 const dir = process.cwd();
-const id = _.last(process.argv); // TODO: Add support for multiple IDs.
+const identifiers = process.argv.slice(2);
 
-if (process.argv.length < 3) {
-  return console.log(clc.yellow(`Usage: `) + clc.white(`instagram-save MEDIA_ID`));
+if (identifiers.length < 1) {
+  return console.log(clc.yellow(`Usage: `) + clc.white(`instagram-save [URL or media ID]`));
 }
 
-save(id);
+async.map(identifiers, save);
 
 /**
  * @param  {string} identifier media ID or URL
@@ -18,9 +19,7 @@ save(id);
  */
 function save(identifier) {
   return new Promise((resolve, reject) => {
-    const url = identifier.substring(0, 8) === 'https://'
-      ? identifier
-      : `https://www.instagram.com/p/${identifier}/`;
+    const url = identifier.substring(0, 8) === 'https://' ? identifier : `https://www.instagram.com/p/${identifier}/`;
 
     request(url, (err, response, body) => {
       if (err) {
@@ -30,8 +29,6 @@ function save(identifier) {
       }
 
       const $ = cheerio.load(body);
-      const isVideo = $('meta[name="medium"]').attr('content') === 'video';
-      const mimeType = $('meta[property="og:video:type"]').attr('content') || 'image/jpeg';
       const canonicalUrl = $('link[rel="canonical"]').attr('href');
 
       if (!canonicalUrl) {
@@ -40,13 +37,19 @@ function save(identifier) {
         return reject();
       }
 
+      const isVideo = $('meta[name="medium"]').attr('content') === 'video';
+      const mimeType = isVideo ? $('meta[property="og:video:type"]').attr('content') : 'image/jpeg';
       const mediaId = canonicalUrl.split('/')[4];
       const filename = createFilename(mediaId, mimeType);
-      const downloadUrl = isVideo
-        ? $('meta[property="og:video"]').attr('content')
-        : $('meta[property="og:image"]').attr('content');
+      const downloadUrl = isVideo ? $('meta[property="og:video"]').attr('content') : $('meta[property="og:image"]').attr('content');
 
-      request.head(downloadUrl, (err, res, body) => {
+      request.head(downloadUrl, error => {
+        if (error) {
+          console.log(clc.red(`Download failed.`));
+
+          return reject(error);
+        }
+
         request(downloadUrl)
           .pipe(fs.createWriteStream(filename))
           .on('close', () => {
