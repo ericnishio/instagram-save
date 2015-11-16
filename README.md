@@ -1,6 +1,8 @@
 instagram-save
 ==============
 
+[![NPM version][npm-image]][npm-url]
+
 Downloads and saves Instagram photos and videos to your current working
 directory.
 
@@ -40,3 +42,10 @@ instagramSave('dU4fHDw-Ho', 'myDir').then(res => {
 ```
 $ npm run lint
 ```
+
+## License
+
+MIT © [Eric Nishio](http://ericnish.io)
+
+[npm-url]: https://npmjs.org/package/instagram-save
+[npm-image]: https://img.shields.io/npm/v/instagram-save.svg?style=flat-square
