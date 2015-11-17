@@ -9,7 +9,9 @@
     "expect": true,
     "describe": true,
     "before": true,
-    "after": true
+    "after": true,
+    "afterEach": true,
+    "beforeEach": true
   },
   "rules": {
     "block-scoped-var": [0],
