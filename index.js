@@ -77,7 +77,7 @@ function createFilename(mediaId, mimeType, dir) {
     'image/jpeg': '.jpg'
   };
 
-  const extension = _.get(mimeTypeToExtensionMap, mimeType, '.jpg');
+  const extension = _.get(mimeTypeToExtensionMap, mimeType);
 
   return `${dir}/${mediaId}${extension}`;
 }
