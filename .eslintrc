@@ -7,7 +7,9 @@
   "globals": {
     "it": true,
     "expect": true,
-    "describe": true
+    "describe": true,
+    "before": true,
+    "after": true
   },
   "rules": {
     "block-scoped-var": [0],
