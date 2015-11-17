@@ -2,6 +2,7 @@ instagram-save
 ==============
 
 [![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
 
 Downloads and saves Instagram photos and videos to your current working
 directory.
@@ -53,3 +54,6 @@ MIT © [Eric Nishio](http://ericnish.io)
 
 [npm-url]: https://npmjs.org/package/instagram-save
 [npm-image]: https://img.shields.io/npm/v/instagram-save.svg?style=flat-square
+
+[travis-url]: https://travis-ci.org/ericnishio/instagram-save
+[travis-image]: https://img.shields.io/travis/ericnishio/instagram-save.svg?style=flat-square
