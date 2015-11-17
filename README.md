@@ -21,9 +21,7 @@ like so:
 
 ```
 $ instagram-save dU4fHDw-Ho
-
 $ instagram-save https://www.instagram.com/p/dU4fHDw-Ho/
-
 $ instagram-save dU4fHDw-Ho 6IbLiMQ-LE
 ```
 
@@ -35,6 +33,12 @@ const save = require('instagram-save');
 save('dU4fHDw-Ho', 'myDir').then(res => {
   console.log(res.file);
 });
+```
+
+## Run Tests
+
+```
+$ npm test
 ```
 
 ## Lint Code
