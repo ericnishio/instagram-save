@@ -13,7 +13,8 @@
   "preferGlobal": "true",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha test/**/*-spec.js",
-    "lint": "node node_modules/eslint/bin/eslint.js index.js"
+    "lint": "node node_modules/eslint/bin/eslint.js index.js lib bin test",
+    "prepublish": "npm test && npm run lint"
   },
   "keywords": [
     "instagram",
