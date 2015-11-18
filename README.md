@@ -7,6 +7,8 @@ instagram-save
 Downloads and saves Instagram photos and videos to your current working
 directory.
 
+![instagram-save][gif]
+
 ## Setup
 
 Requirements: *Node 4+*
@@ -57,3 +59,5 @@ MIT © [Eric Nishio](http://ericnish.io)
 
 [travis-url]: https://travis-ci.org/ericnishio/instagram-save
 [travis-image]: https://img.shields.io/travis/ericnishio/instagram-save.svg?style=flat-square
+
+[gif]: /doc/demo.gif
