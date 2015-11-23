@@ -28,6 +28,19 @@ $ instagram-save https://www.instagram.com/p/dU4fHDw-Ho/
 $ instagram-save dU4fHDw-Ho 6IbLiMQ-LE
 ```
 
+Or read URLs from a file (e.g. `urls.txt`):
+
+```
+https://www.instagram.com/p/dU4fHDw-Ho/
+https://www.instagram.com/p/6IbLiMQ-LE/
+```
+
+And run:
+
+```
+$ instagram-save -f urls.txt
+```
+
 ## Node Usage
 
 ```javascript
