@@ -20,7 +20,7 @@ function save(urlOrMediaId, dir) {
         const mimeType = post.mimeType;
         const file = `${dir}/${filename}`;
 
-        downloadAndSave(downloadUrl, filename).then(() => {
+        downloadAndSave(downloadUrl, file).then(() => {
           return resolve({
             file,
             mimeType,
