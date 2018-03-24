@@ -1,6 +1,6 @@
-const createUrl = require('./lib/create-url');
-const downloadAndSave = require('./lib/download-and-save');
-const parsePage = require('./lib/parse-page');
+const createUrl = require("./lib/create-url");
+const downloadAndSave = require("./lib/download-and-save");
+const parsePage = require("./lib/parse-page");
 
 module.exports = save;
 
@@ -18,14 +18,16 @@ function save(urlOrMediaId, dir) {
         const filename = post.filename;
         const isVideo = post.isVideo;
         const mimeType = post.mimeType;
+        const caption = post.caption;
         const file = `${dir}/${filename}`;
 
         downloadAndSave(downloadUrl, file).then(() => {
           return resolve({
             file,
+            caption,
             mimeType,
             url,
-            label: isVideo ? 'video' : 'photo',
+            label: isVideo ? "video" : "photo",
             source: downloadUrl
           });
         });
