@@ -6,8 +6,6 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 
 const sinon = require('sinon');
-require('sinon-as-promised');
-
 const request = require('request-promise');
 const parsePage = require('../lib/parse-page');
 const cheerio = require('cheerio');

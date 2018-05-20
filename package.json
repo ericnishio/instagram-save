@@ -38,18 +38,18 @@
     "url": "https://github.com/ericnishio/instagram-save.git"
   },
   "dependencies": {
-    "async": "^1.5.0",
-    "cheerio": "^0.19.0",
+    "async": "^2.6.0",
+    "cheerio": "^0.22.0",
     "cli-color": "^1.1.0",
-    "lodash": "^3.10.1",
-    "request-promise": "^1.0.2"
+    "lodash": "^4.17.10",
+    "request": "^2.86.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "chai": "3.4.1",
-    "chai-as-promised": "^5.1.0",
-    "eslint": "^1.9.0",
-    "mocha": "2.3.4",
-    "sinon": "1.17.2",
-    "sinon-as-promised": "^4.0.0"
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^4.19.1",
+    "mocha": "^5.2.0",
+    "sinon": "^5.0.7"
   }
 }
