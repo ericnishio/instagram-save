@@ -1,5 +1,4 @@
-instagram-save
-==============
+# <img src="doc/instagram-save.png" height="60" alt="instagram-save" />
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
