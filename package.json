@@ -10,7 +10,7 @@
   "bin": {
     "instagram-save": "bin/cli.js"
   },
-  "preferGlobal": "true",
+  "preferGlobal": true,
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha test/**/*-spec.js --timeout 5000",
     "lint": "node node_modules/eslint/bin/eslint.js index.js lib bin test",
